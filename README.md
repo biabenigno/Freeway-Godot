@@ -1,2 +1,1 @@
-Projeto da Faculdade 
-Jogo estilo Freeway
+Projeto de jogo estilo Freeway

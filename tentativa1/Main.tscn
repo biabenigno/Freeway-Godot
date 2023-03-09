@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://ig8fwecv4i0i"]
+
+[ext_resource type="PackedScene" path="res://galinha.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://c140bam650obd" path="res://Material freeway/wallpaperfreeway.png" id="2"]
+[ext_resource type="PackedScene" path="res://Linha de Chegada.tscn" id="3"]
+[ext_resource type="AudioStream" uid="uid://c3xajan6j72jp" path="res://Material freeway/sons/tema.wav" id="4"]
+[ext_resource type="Script" path="res://Main.gd" id="5"]
+[ext_resource type="PackedScene" path="res://HUD.tscn" id="6"]
+[ext_resource type="AudioStream" uid="uid://dxtmq4wm2avqu" path="res://Material freeway/sons/ganhou.wav" id="7"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("5")
+
+[node name="Cenário" type="Sprite2D" parent="."]
+position = Vector2(641, 361)
+texture = ExtResource("2")
+
+[node name="Galinha" parent="." instance=ExtResource("1")]
+velocidade = null
+
+[node name="Galinha2" parent="." instance=ExtResource("1")]
+velocidade = null
+
+[node name="LinhaDeChegada" parent="." instance=ExtResource("3")]
+position = Vector2(640, 65)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Tema" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4")
+autoplay = true
+
+[node name="Timer2" type="Timer" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("6")]
+
+[node name="Ganhou" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7")
+
+[connection signal="pontuar" from="Galinha" to="." method="_on_Galinha_pontuar"]
+[connection signal="pontuar" from="Galinha2" to="." method="_on_Galinha_pontuar"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_Timer2_timeout"]
+[connection signal="reset" from="HUD" to="." method="_on_HUD_reset"]
